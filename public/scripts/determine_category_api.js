@@ -51,27 +51,25 @@ const getAppCategory = (apiCategory) => {
 };
 
 //fetch IP******************************
-const classifyText = function (text, callback) {
-  text = text.replace(" ", "+");
-
+const classifyText = function (text) {
   request(
     `https://api.uclassify.com/v1/uclassify/iab-taxonomy-v2/classify?readkey=P9I1i40eO5An&text=${text}`,
     (error, response, body) => {
       if (error) {
-        callback(error.code, null);
-        return;
+        console.log(error.code);
+        return error.code;
       }
 
       if (response.statusCode !== 200) {
         const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
-        callback(Error(msg), null);
-        return;
+        console.log(msg);
+        return msg;
       }
 
       const classify = JSON.parse(body);
 
       category = getAppCategory(getMax(classify));
-      console.log(category);
+      console.log(`${category}: ${text}`);
       return category;
     }
   );
@@ -84,3 +82,5 @@ classifyText("I want to buy a phone");
 classifyText("I want to watch the avengers");
 
 classifyText("I want to read Outliers");
+
+classifyText("");
