@@ -14,9 +14,60 @@
 
   <body>
     <%- include('./partials/_header');%>
-    <h1>TODO</h1>
-    <form id="new-todo" action="/todo" method="POST">
-    <input type="text"  name="newTodo" placeholder="Enter an item">
-    </form>
+    <div class="todo container">
+      <h1>TODO</h1>
+      <form class="new todo" action="/todo" method="POST">
+        <input type="text" name="newTodo" placeholder="Enter an item" />
+      </form>
+      <br />
+      <form class="watch todos" action="/todo" method="POST">
+        <h6>TO WATCH</h6>
+        <label
+          ><input type="checkbox" name="todo-element" id="todo-id" />name</label
+        >
+        <article class="todoElement">
+          <div>category:</div>
+          <div>name:</div>
+          <div>description:</div>
+        </article>
+      </form>
+      <br>
+      <form class="read todos" action="/todo" method="POST">
+        <h6>TO READ</h6>
+        <label
+          ><input type="checkbox" name="todo-element" id="todo-id" />name</label
+        >
+        <article class="todoElement">
+          <div>category:</div>
+          <div>name:</div>
+          <div>description:</div>
+        </article>
+      </form>
+      <br>
+      <form class="buy todos" action="/todo" method="POST">
+        <h6>TO BUY</h6>
+        <label
+          ><input type="checkbox" name="todo-element" id="todo-id" />name</label
+        >
+        <article class="todoElement">
+          <div>category:</div>
+          <div>name:</div>
+          <div>description:</div>
+        </article>
+      </form>
+      <br>
+      <form class="eat todos" action="/todo" method="POST">
+        <h6>TO EAT</h6>
+        <label
+          ><input type="checkbox" name="todo-element" id="todo-id" />name</label
+        >
+        <article class="todoElement">
+          <div>category:</div>
+          <div>name:</div>
+          <div>description:</div>
+        </article>
+      </form>
+      <br>
+    </div>
   </body>
 </html>
