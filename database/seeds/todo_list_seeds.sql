@@ -1,5 +1,13 @@
-INSERT INTO todo_lists (user_id, title, category, description, status)
-VALUES (1, 'shop for fidget spinners', 'toBuy', 'me like the fidgety toy', TRUE),
-(1, 'watch Game of Thrones', 'toWatch', 'Cersei Lannister did not deserve a peaceful death', TRUE);
-INSERT INTO todo_lists (user_id, title, category, status)
-VALUES (1, 'read LHL Job Seekers Agreement', 'toRead', 'True');
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'shop for fidget spinners', 'toBuy', 'me like the fidgety toy', TRUE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'watch Game of Thrones', 'toWatch', 'Cersei Lannister did not deserve a peaceful death', TRUE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'watch Avengers Endgame', 'toWatch', 'Batman is my favourite avenger lol', TRUE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'read LHL Job Seekers Agreement', 'toRead','', TRUE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'date with da gf', 'toEat', 'Cactus Club Cafe', FALSE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'coffee with mentor', 'toEat', '', FALSE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'buy groceries', 'toBuy', 'eggs, tomatoes, bacon, cheese, mayo', TRUE);
+INSERT INTO todo_lists (user_id, title, category, description, status) VALUES (1, 'rob a bank', '', 'i think scotia bank is richer than any other banks', FALSE);
+INSERT INTO todo_lists (user_id, title, description, status) VALUES (1, 'take kids to dance classes', '"address of the dance studio"', TRUE);
+INSERT INTO todo_lists (user_id, title, description, status) VALUES (1, 'pick up kids from dance classes', 'DONT FORGET YOUR KIDS THIS TIME', TRUE);
+INSERT INTO todo_lists (user_id, title, description, status) VALUES (1, 'buy kids ice cream', 'because I forgot to pick them up', FALSE);
+INSERT INTO todo_lists (user_id, title, status) VALUES (1, 'take out trash', TRUE);
+INSERT INTO todo_lists (user_id, title, status) VALUES (1, 'fill up gas', FALSE);
