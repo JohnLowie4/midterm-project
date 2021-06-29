@@ -173,8 +173,8 @@ const getArchivedCategory = (userID, category) => {
 const addNewUser = (arrOfArgs) => {
 
   const queryString = `
-    INSERT INTO users (name, email, password)
-    VALUES ($1, $2, $3)
+    INSERT INTO users (email, password)
+    VALUES ($1, $2)
     RETURNING *
   `;
 
