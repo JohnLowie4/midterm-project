@@ -6,6 +6,7 @@ const dbQueries = require('../database/database')
 // GET /register
 
 router.post("/", (req, res) => {
+  req.session = null;
   res.redirect("/login");
 });
 

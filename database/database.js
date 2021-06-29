@@ -15,6 +15,18 @@ const pool = new Pool({
   database: 'midterm'
 });
 
+const getUserByEmail = (userEmail) => {
+  const queryString = `SELECT email, password FROM users WHERE email = $1`;
+  return pool
+    .query(queryString, [userEmail])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
 /**
  * Gets all active and archived to do lists of a user
  * @param {Integer} userID
@@ -235,6 +247,7 @@ const deleteToDoList = (userID, todoID) => {
 
 module.exports = {
   pool,
+  getUserByEmail,
   getAll,
   getAllActive,
   getAllArchive,

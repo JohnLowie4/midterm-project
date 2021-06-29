@@ -8,6 +8,14 @@
       </div>
     </div>
     <div>
+      <% if(user_email){ %>
+        <a class="navbar-brand"> Logged in as: <%=user_email%></a>
+        <br/>
+        <form class="form-inline" method="POST" action="/logout">
+          <button type="submit" class="btn btn-outline-dark"> Logout </button>
+        </form>
+
+    <% } else{ %>
       <a href="/register">Create Account</a>
         <a href="/login">Login</a>
         <form action="/logout" method="POST">
@@ -15,6 +23,9 @@
             Logout
           </button>
         </form>
+
+
+   <% } %>
       </div>
     </div>
   </nav>

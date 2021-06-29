@@ -7,6 +7,20 @@ const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
+const {
+  pool,
+  getUserByEmail,
+  getAll,
+  getAllActive,
+  getAllArchive,
+  getAllItemCategory,
+  getActiveCategory,
+  getArchivedCategory,
+  addToDoList,
+  updateToDoList,
+  deleteToDoList
+} = require('./database/database')
+
 
 // const sass       = require("node-sass-middleware");
 const app = express();
@@ -69,7 +83,10 @@ app.use("/todo", todoRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  const templateVars = {user_email: req.session.user_email};
+  res.render("index", templateVars);
+
+
 });
 
 // //user login page

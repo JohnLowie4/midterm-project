@@ -6,7 +6,8 @@ const dbQueries = require('../database/database')
 // GET /register
 
 router.get("/", (req, res) => {
-  res.render("register");
+  const templateVars = {user_email: req.session.user_email};
+  res.render("register", templateVars);
 });
 
 module.exports = router;

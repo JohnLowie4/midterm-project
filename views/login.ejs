@@ -15,5 +15,12 @@
   <body>
     <%- include('./partials/_header');%>
     <h1>Login</h1>
+    <form method="POST" action= "/login" class= "login-user">
+      <label>Email: </label>
+      <input name="email" type="email" required/>
+      <label>Password: </label>
+      <input name="password" type="password" required/>
+      <button type="submit" class="button">Login</button>
+    </form>
   </body>
 </html>
