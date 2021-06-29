@@ -32,7 +32,7 @@ router.post("/", (req, res) => {
   getUserByEmail(email)
   .then((result) => {
     if (!result) {
-      console.log("result test", result);
+      console.log("🚀 ~ file: login.js ~ line 35 ~ .then ~ result", result)
       return res.status(403).send("email not found");
     }
     if (password !== result.password) { //check if password matches the one in our database
