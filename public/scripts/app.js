@@ -4,8 +4,8 @@ const todoElement = function (todo) {
 ><input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}</label
 >
 <article class="todoElement">
-<div>category: ${todo.category}</div>
-<div>title:${todo.title}</div>
+<div>category: <span contenteditable="true"> ${todo.category} </span></div>
+<div>title:<span contenteditable="true">${todo.title}</span></div>
 <div>description: ${todo.description} </div>
 </article>`;
 
