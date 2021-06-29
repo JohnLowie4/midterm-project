@@ -1,12 +1,14 @@
-
 const express = require("express");
 const router = express.Router();
 const dbQueries = require('../database/database')
 
-// GET /register
+router.get('/', (req, res) => {
+  dbQueries.getAll('1')
+  .then((items) => {
+    res.json(items);
+  });
 
-router.post("/", (req, res) => {
-  res.redirect("/login");
+
 });
 
 module.exports = router;
