@@ -52,26 +52,28 @@ const getAppCategory = (apiCategory) => {
 
 //fetch IP******************************
 const classifyText = function (text) {
-  request(
-    `https://api.uclassify.com/v1/uclassify/iab-taxonomy-v2/classify?readkey=P9I1i40eO5An&text=${text}`,
-    (error, response, body) => {
-      if (error) {
-        console.log(error.code);
-        return error.code;
+  return new Promise((resolve, reject) => {
+    request(
+      `https://api.uclassify.com/v1/uclassify/iab-taxonomy-v2/classify?readkey=P9I1i40eO5An&text=${text}`,
+      (error, response, body) => {
+        if (error) {
+          console.log(error.code);
+          reject(error.code);
+        }
+
+        if (response.statusCode !== 200) {
+          const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
+          console.log(msg);
+          reject(msg);
+        }
+
+        const classify = JSON.parse(body);
+
+        category = getAppCategory(getMax(classify));
+        console.log(`${category}: ${text}`);
+        resolve(category);
       }
-
-      if (response.statusCode !== 200) {
-        const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
-        console.log(msg);
-        return msg;
-      }
-
-      const classify = JSON.parse(body);
-
-      category = getAppCategory(getMax(classify));
-      console.log(`${category}: ${text}`);
-      return category;
-    }
-  );
+    );
+  });
 };
-module.exports = {classifyText}
+module.exports = { classifyText };
