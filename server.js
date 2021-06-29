@@ -16,6 +16,7 @@ const {
   getAllItemCategory,
   getActiveCategory,
   getArchivedCategory,
+  addNewUser,
   addToDoList,
   updateToDoList,
   deleteToDoList

@@ -15,10 +15,15 @@ const pool = new Pool({
   database: 'midterm'
 });
 
+/**
+ * Gets user by email
+ * @param {String} userEmail
+ * @returns {Promise<{}>} an object user information
+ */
 const getUserByEmail = (userEmail) => {
   const queryString = `SELECT email, password FROM users WHERE email = $1`;
   return pool
-    .query(queryString, [userEmail])
+    .query(queryString, [`%${userEmail}%`])
     .then((result) => {
       return result.rows[0];
     })
@@ -161,6 +166,31 @@ const getArchivedCategory = (userID, category) => {
 };
 
 /**
+ * Adds a new user to database
+ * @param {Array} arrOfArgs
+ * @returns {Promise<{}>} an object of the new user
+ */
+const addNewUser = (arrOfArgs) => {
+
+  const queryString = `
+    INSERT INTO users (name, email, password)
+    VALUES ($1, $2, $3)
+    RETURNING *
+  `;
+
+  arrOfArgs.forEach(element => `%${element}%`);
+
+  return pool
+    .query(queryString, arrOfArgs)
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+/**
  * Adds a new item to the to do list of a user
  * @param {Integer} userID
  * @param {Array} arrOfArgs An arry of arguments to be added into todo_lists database
@@ -254,6 +284,7 @@ module.exports = {
   getAllItemCategory,
   getActiveCategory,
   getArchivedCategory,
+  addNewUser,
   addToDoList,
   updateToDoList,
   deleteToDoList
