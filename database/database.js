@@ -23,7 +23,7 @@ const pool = new Pool({
 const getUserByEmail = (userEmail) => {
   const queryString = `SELECT email, password FROM users WHERE email = $1`;
   return pool
-    .query(queryString, [`%${userEmail}%`])
+    .query(queryString, [userEmail])
     .then((result) => {
       return result.rows[0];
     })
