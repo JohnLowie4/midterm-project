@@ -31,8 +31,8 @@ router.post("/", (req, res) => {
   // const user = getUserByEmail(email);
   getUserByEmail(email)
   .then((result) => {
+    console.log("🚀 ~ file: login.js ~ line 34 ~ .then ~ result", result)
     if (!result) {
-      console.log("result test", result);
       return res.status(403).send("email not found");
     }
     if (password !== result.password) { //check if password matches the one in our database

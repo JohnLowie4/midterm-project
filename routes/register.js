@@ -30,14 +30,26 @@ router.post("/", (req, res) => {
   if (email.length === 0 || req.body.password.length === 0) {
     return res.status(400).send("oops u forgot to fill in one of the fields");
   }
-  //check f the email already exists
-  if (getUserByEmail(email)) {
-    return res.status(400).send("email exists in database pls dont hack me");
-  }
+  getUserByEmail(email)
+  .then((result) => {
+    console.log("🚀 ~ file: register.js ~ line 35 ~ .then ~ result", result)
+
+    if (result["email"]) {
+      console.log("🚀 ~ file: login.js ~ line 35 ~ .then ~ result", result)
+      return res.status(403).send("email already exists");
+    }
+    else {
+      addNewUser([email, password]);
+      req.session.user_email = email;
+      res.redirect("/");
+    }
+  });
+  //check if the email already exists needs to be implemented
+
   //create the user object and add it to the database then log the user in
-  addNewUser([email, password]);
-  req.session.user_email = email;
-  res.redirect("/");
+  // addNewUser([email, password]);
+  // req.session.user_email = email;
+  // res.redirect("/");
 });
 
 
