@@ -45,7 +45,7 @@ const getAllActive = (userID) => {
     SELECT * FROM todo_lists
     WHERE user_id = $1 AND status = TRUE`;
 
-    return pool
+  return pool
     .query(queryString, [userID])
     .then((result) => {
       return result.rows;
@@ -66,8 +66,32 @@ const getAllArchive = (userID) => {
     SELECT * FROM todo_lists
     WHERE user_id = $1 AND status = FALSE`;
 
-    return pool
+  return pool
     .query(queryString, [userID])
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
+
+/**
+ * Gets all the active and archived items from a category
+ * @param {Integer} userID
+ * @param {String} category
+ * @returns {Promise<[]>} an array of objects
+ */
+const getAllItemCategory = (userID, category) => {
+
+  const queryString = `
+    SELECT * FROM todo_lists
+    WHERE user_id = $1
+    AND category = $2
+  `;
+
+  return pool
+    .query(queryString, [userID, category])
     .then((result) => {
       return result.rows;
     })
@@ -90,7 +114,7 @@ const getActiveCategory = (userID, category) => {
     AND user_id = $1
     AND category = $2`;
 
-    return pool
+  return pool
     .query(queryString, [userID, category])
     .then((result) => {
       return result.rows;
@@ -114,7 +138,7 @@ const getArchivedCategory = (userID, category) => {
     AND user_id = $1
     AND category = $2`;
 
-    return pool
+  return pool
     .query(queryString, [userID, category])
     .then((result) => {
       return result.rows;
@@ -138,7 +162,7 @@ const addToDoList = (userID, arrOfArgs) => {
     RETURNING *
   `;
 
-  arrOfArgs.forEach(element => `${element}`); // Changes arguments to prevent sql injection
+  arrOfArgs.forEach(element => `%${element}%`); // Changes arguments to prevent sql injection
   arrOfArgs.unshift(userID);  // Appends the userID as first element in arrOfArgs
 
   return pool
@@ -168,9 +192,10 @@ const updateToDoList = (userID, todoID, arrOfArgs) => {
         description = $5,
         status = $6
     WHERE user_id = $1 AND id = $2
+    RETURNING *
   `;
 
-  arrOfArgs.forEach(element => `${element}`); // Changes arguments to prevent sql injection
+  arrOfArgs.forEach(element => `%${element}%`); // Changes arguments to prevent sql injection
   arrOfArgs.unshift(userID, todoID);  // Appends the userID as first element in arrOfArgs
 
   return pool
@@ -209,9 +234,11 @@ const deleteToDoList = (userID, todoID) => {
 };
 
 module.exports = {
+  pool,
   getAll,
   getAllActive,
   getAllArchive,
+  getAllItemCategory,
   getActiveCategory,
   getArchivedCategory,
   addToDoList,
