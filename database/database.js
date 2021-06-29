@@ -110,7 +110,7 @@ const getArchivedCategory = (userID, category) => {
  * Adds a new item to the to do list of a user
  * @param {Integer} userID
  * @param {Array} arrOfArgs An arry of arguments to be added into todo_lists database
- * @returns {Promise<[]>} an array of objects
+ * @returns {Promise<{}>} an object of the new item added
  */
 const addToDoList = (userID, arrOfArgs) => {
   const queryString = `
@@ -118,11 +118,12 @@ const addToDoList = (userID, arrOfArgs) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `;
+  arrOfArgs.forEach(element => `${element}`);
   arrOfArgs.unshift(userID);  // Appends the userID as first element in arrOfArgs
   return pool
     .query(queryString, arrOfArgs)
     .then((result) => {
-      return result.rows;
+      return result.rows[0];
     })
     .catch((error) => {
       console.log(error.message);
@@ -131,6 +132,7 @@ const addToDoList = (userID, arrOfArgs) => {
 
 /**
  * Updates a currently active item of a user
+ * Can archive/un-archive items
  * @param {Integer} userID
  * @param {Integer} todoID Integer ID of a specified to do list
  * @param {Array} arrOfArgs An array of arguments to be updated
@@ -145,7 +147,7 @@ const updateToDoList = (userID, todoID, arrOfArgs) => {
  * Can be done for active and archived to do items
  * @param {Integer} userID
  * @param {Integer} todoID
- * @returns {Promise<[]>} an array of the deleted object
+ * @returns {Promise<{}>} an object of the item that was deleted
  */
 const deleteToDoList = (userID, todoID) => {
   return pool
@@ -155,7 +157,7 @@ const deleteToDoList = (userID, todoID) => {
     AND id = $2
     RETURNING *`, [userID, todoID])
     .then((result) => {
-      return result.rows;
+      return result.rows[0];
     })
     .catch((error) => {
       console.log(error.message);
