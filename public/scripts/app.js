@@ -19,7 +19,7 @@ const addElement = function (todo) {
   }
 
   if (todo.category === "toRead") {
-    $("read.todos").append(todoElement(todo));
+    $(".read.todos").append(todoElement(todo));
   }
 
   if (todo.category === "toBuy") {
