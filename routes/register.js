@@ -27,16 +27,15 @@ router.post("/", (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
   //check if both fields have data
-  // if (email.length === 0 || req.body.password.length === 0) {
-  //   return res.status(400).send("oops u forgot to fill in one of the fields");
-  // }
+  if (email.length === 0 || req.body.password.length === 0) {
+    return res.status(400).send("oops u forgot to fill in one of the fields");
+  }
   //check f the email already exists
-  // if (getUserByEmail(email, users)) {
-  //   return res.status(400).send("email exists in database pls dont hack me");
-  // }
+  if (getUserByEmail(email)) {
+    return res.status(400).send("email exists in database pls dont hack me");
+  }
   //create the user object and add it to the database then log the user in
-
-
+  addNewUser([email, password]);
   req.session.user_email = email;
   res.redirect("/");
 });

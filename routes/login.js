@@ -26,12 +26,13 @@ router.get('/', (req, res) => {
 router.post("/", (req, res) => {
   //store the incoming email and password fields
   const email = req.body.email;
+  console.log("🚀 ~ file: login.js ~ line 29 ~ router.post ~ email", email, typeof(email));
   const password = req.body.password;
   // const user = getUserByEmail(email);
   getUserByEmail(email)
   .then((result) => {
     if (!result) {
-      console.log("result", result);
+      console.log("result test", result);
       return res.status(403).send("email not found");
     }
     if (password !== result.password) { //check if password matches the one in our database
@@ -46,18 +47,6 @@ router.post("/", (req, res) => {
 
   });
 
-  //check if user exists
-  // if (!user) {
-  //   return res.status(403).send("email not found");
-  // }
-  // if (password !== user.password) { //check if password matches the one in our database
-  //   console.log(user);
-  //   return res.status(403).send("incorrect password");
-
-  // }
-  // //set the cookie the redirect to home page
-  // req.session.user_id = 1;
-  // res.redirect("/");
 });
 
 
