@@ -74,15 +74,4 @@ const classifyText = function (text) {
     }
   );
 };
-
-// classifyText("I want to eat at McDonalds");
-
-// classifyText("I want to buy a phone");
-
-// classifyText("I want to watch the avengers");
-
-// classifyText("I want to read Outliers");
-
-// classifyText("");
-
 module.exports = {classifyText}
