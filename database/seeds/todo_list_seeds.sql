@@ -6,7 +6,7 @@ INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'buy new ke
 INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'watch Game of Thrones', 'toWatch', TRUE);
 INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'watch Avengers Endgame', 'toWatch', TRUE);
 INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'watch Frozen 2', 'toWatch', FALSE);
-INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'watch mayukos tech videos on youtube', TRUE);
+INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'watch mayukos tech videos on youtube', 'toWatch', TRUE);
 INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'read LHL Job Seekers Agreement', 'toRead', TRUE);
 INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'read cracking the coding interview', 'toRead', FALSE);
 INSERT INTO todo_lists (user_id, title, category, status) VALUES (1, 'read through midterm requirements', 'toRead', TRUE);

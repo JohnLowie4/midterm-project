@@ -199,8 +199,8 @@ const addNewUser = (arrOfArgs) => {
 const addToDoList = (userID, arrOfArgs) => {
 
   const queryString = `
-    INSERT INTO todo_lists (user_id, title, category, description)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO todo_lists (user_id, title, category)
+    VALUES ($1, $2, $3)
     RETURNING *
   `;
 
@@ -231,8 +231,7 @@ const updateToDoList = (userID, todoID, arrOfArgs) => {
     UPDATE todo_lists
     SET title = $3,
         category = $4,
-        description = $5,
-        status = $6
+        status = $5
     WHERE user_id = $1 AND id = $2
     RETURNING *
   `;
