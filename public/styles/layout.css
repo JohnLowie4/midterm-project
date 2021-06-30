@@ -44,7 +44,7 @@ body h1 {
   align-content: center;
   justify-content: center;
   background: white;
-  border: black solid;
+  /* border: black solid; */
 }
 
 .todos article{

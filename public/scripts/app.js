@@ -6,7 +6,6 @@ const todoElement = function (todo) {
 <article class="todoElement">
 <div>category: <span contenteditable="true"> ${todo.category} </span></div>
 <div>title:<span contenteditable="true">${todo.title}</span></div>
-<div>description: ${todo.description} </div>
 </article>`;
 
   return newElement;
