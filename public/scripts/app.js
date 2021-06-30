@@ -34,6 +34,12 @@ const addElement = function (todo) {
 };
 
 $(document).ready(function () {
+  //hide items on load
+  $(`.watch.todos`).hide()
+  $(`.read.todos`).hide()
+  $(`.buy.todos`).hide()
+  $(`.eat.todos`).hide()
+
   //get existing todo items on page load / reload
   const loadToDos = function () {
     $.ajax({
@@ -72,6 +78,7 @@ $(document).ready(function () {
     );
   });
 
+<<<<<<< HEAD
   //Delete button code that is working now.
   $('.todo.container').on('click','.deleteButton',function(e){
     e.preventDefault();
@@ -117,9 +124,17 @@ $(document).ready(function () {
   //   $(`.collapsible.${category} label`).slideToggle(1000);
   //   $(`.collapsible.${category} article`).slideToggle(1000);
   // }
+=======
+  // toggle buttons for each category
+  function toggleToDoList(category) {
+    $(`.collapsible.${category}`).click(() => {
+      $(`.${category}.todos`).slideToggle();
+    });
+  }
+>>>>>>> origin/master
 
-  // toggleButton.click(toggleToDoList("watch"));
-  // toggleButton.click(toggleToDoList("read"));
-  // toggleButton.click(toggleToDoList("buy"));
-  // toggleButton.click(toggleToDoList("eat"));
+  toggleToDoList("watch");
+  toggleToDoList("read");
+  toggleToDoList("buy");
+  toggleToDoList("eat");
 });
