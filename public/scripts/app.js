@@ -1,15 +1,7 @@
 //function creates element for every individual todo item
 const todoElement = function (todo) {
-  newElement = `<label
-><input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}<button class="deleteButton" id="${todo.id}"> DeleteME </button></label
->
-<article class="todoElement">
-<div>category: <span contenteditable="true"> ${todo.category} </span></div>
-<div>title:<span contenteditable="true">${todo.title}</span></div>
-</article>`;
+  newElement = `<label><input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}<button class="deleteButton" id="${todo.id}"> DeleteME </button></label>
 
-  return newElement;
-};
 
 //function determines category and calls the todoElement function
 const addElement = function (todo) {
@@ -55,11 +47,12 @@ $(document).ready(function () {
 
   loadToDos();
 
+
   //add new todo list to form upon user submission
   $(".new.todo").on("submit", function (event) {
     event.preventDefault();
     let data = $("input", this).val();
-    console.log(data);
+
 
     //if user enters blank todo send alert for now
     if (data.length === 0) {
@@ -68,7 +61,6 @@ $(document).ready(function () {
 
     $.ajax({ method: "POST", url: "/todo", data: { task: data } }).then(
       (response) => {
-        console.log(response);
         $(".new.todo input").val("");
         loadToDos();
       }
@@ -83,6 +75,7 @@ $(document).ready(function () {
 
     //alert("We are  good to go");
     $.ajax({
+
       method: "POST",
       url: `/todo/delete/${id}`,
       success: function (result) {

@@ -4,7 +4,8 @@ const { classifyText } = require("./determine_category_api");
 const { pool, getUserByEmail } = require("../database/database");
 
 module.exports = (database) => {
-  //load existing todo items inthe database
+  //1. load existing todo items inthe database
+  // /todo - GET to get all the Todos
   router.get("/", (req, res) => {
     //if logged in
     if (req.session.user_email) {
@@ -16,7 +17,6 @@ module.exports = (database) => {
             .query("SELECT * FROM todo_lists WHERE user_id=$1;", [userID])
             .then((data) => {
               const todos = data.rows;
-              console.log(todos);
               res.send(todos);
             });
         });
@@ -24,6 +24,7 @@ module.exports = (database) => {
     //if not logged in?
   });
 
+  //2. /todo - POST to create a new TODO
   //new to-do
   router.post("/", async function (req, res) {
     if (!req.session.user_email){
@@ -47,9 +48,10 @@ module.exports = (database) => {
       });
   });
 
+
     //3. Route for the Deletion purpose
   // /todo/delete/:todoid - POST - To delete a particular Route.
-  router.post("/delete/:todoid",(req,res)=>{
+   router.post("/delete/:todoid",(req,res)=>{
     console.log("I am in the delete todo route");
     console.log("The todo id is",req.params.todoid);
     res.json({result: "Record Deleted"});

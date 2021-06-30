@@ -274,6 +274,22 @@ const deleteToDoList = (userID, todoID) => {
     });
 };
 
+const getIdByEmail = (userEmail) => {
+
+  const queryString = `
+  SELECT id FROM users WHERE email=$1
+  `;
+
+  return pool
+  .query(queryString, [userEmail])
+  .then ((result) => {
+    return result.rows[0].id;
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+
+}
 module.exports = {
   pool,
   getUserByEmail,
@@ -286,5 +302,6 @@ module.exports = {
   addNewUser,
   addToDoList,
   updateToDoList,
-  deleteToDoList
+  deleteToDoList,
+  getIdByEmail
 };

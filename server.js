@@ -59,6 +59,7 @@ app.use(express.static("public"));
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const logoutRoutes = require("./routes/logout");
+const deleteRoutes = require("./routes/delete");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -67,6 +68,8 @@ const logoutRoutes = require("./routes/logout");
 app.use("/register", registerRoutes);
 app.use("/login", loginRoutes);
 app.use("/logout", logoutRoutes);
+app.use("/todos/delete", deleteRoutes);
+
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const todoRoutes = require("./routes/todo")
@@ -75,7 +78,9 @@ const todoRoutes = require("./routes/todo")
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db))
-app.use("/todo", todoRoutes(db));
+app.use("/todo", todoRoutes(db)); //perfect
+// 4 routes mounting for todo - 1 Delete, Update, 1, Select 1 Select a particular
+
 
 // Note: mount other resources here, using the same pattern above
 
