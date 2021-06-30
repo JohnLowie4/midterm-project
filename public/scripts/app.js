@@ -33,24 +33,27 @@ const addElement = function (todo) {
 
 $(document).ready(function () {
   //get existing todo items on page load / reload
-  const loadToDos = function(){
+  const loadToDos = function () {
     $.ajax({
       method: "GET",
       url: "/todo",
     }).done((todos) => {
+      $(".watch.todos").empty();
+      $(".read.todos").empty();
+      $(".buy.todos").empty();
+      $(".eat.todos").empty();
       todos.forEach((todo) => {
         addElement(todo);
       });
     });
-  }
+  };
 
   loadToDos();
-
 
   //add new todo list to form upon user submission
   $(".new.todo").on("submit", function (event) {
     event.preventDefault();
-    let data = $("input",this).val();
+    let data = $("input", this).val();
     console.log(data);
 
     //if user enters blank todo send alert for now
@@ -58,11 +61,13 @@ $(document).ready(function () {
       return alert("To-do field is blank!");
     }
 
-    $.ajax({ method: "POST", url: "/todo", data:{task:data}}).then((response) => {
-      console.log(response);
-      $(".new.todo input" ).val("");
-      loadToDos();
-    });
+    $.ajax({ method: "POST", url: "/todo", data: { task: data } }).then(
+      (response) => {
+        console.log(response);
+        $(".new.todo input").val("");
+        loadToDos();
+      }
+    );
   });
 
   //toggle buttons for each category
@@ -77,4 +82,3 @@ $(document).ready(function () {
   // toggleButton.click(toggleToDoList("buy"));
   // toggleButton.click(toggleToDoList("eat"));
 });
-
