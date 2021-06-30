@@ -1,0 +1,76 @@
+body {
+  background-color: #eee;
+  background-image: url(images/minimalist-background-uhd-8k-wallpaper.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body h1 {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.todo.container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
+  width:40%;
+  height: 80%
+}
+
+.new.todo {
+  display: flex;
+  justify-content: center;
+}
+
+.new.todo input{
+  outline: solid;
+}
+
+.todo.list {
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+
+}
+
+.todos {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  background: white;
+  border: black solid;
+}
+
+.todos article{
+  border:black  solid;
+  margin: .5rem
+}
+
+.todos h6 {
+  height: min-content;
+  margin: 0;
+}
+
+.collapsible {
+  background-color: grey;
+  color:black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+

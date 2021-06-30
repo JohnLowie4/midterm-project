@@ -13,6 +13,12 @@ module.exports = (database) => {
 
   //new to-do
   router.post("/", async function (req, res) {
+    let userID = req.session.user_email
+    // if (!userID){
+    //   return res
+    //   .status(403)
+    //   .send("Must be logged in to create to-do list items!")
+    // }
     let newToDo = await classifyText(req.body.task);
     res.send(newToDo);
     const queryString = `
@@ -20,7 +26,7 @@ module.exports = (database) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *
   `;
-    const queryValues = [1, req.body.task, newToDo, "description"];
+    const queryValues = [1, req.body.task, newToDo, ""];
     database.query(queryString, queryValues);
     console.log(database.query);
   });
