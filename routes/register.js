@@ -43,13 +43,19 @@ router.post("/", (req, res) => {
       req.session.user_email = email;
       res.redirect("/");
     }
+    // addNewUser([email, password]);
+    // req.session.user_email = email;
+    // res.redirect("/");
+  })
+
+  .catch((error) => {
+    addNewUser([email, password]);
+    req.session.user_email = email;
+    res.redirect("/");
   });
+
   //check if the email already exists needs to be implemented
 
-  //create the user object and add it to the database then log the user in
-  // addNewUser([email, password]);
-  // req.session.user_email = email;
-  // res.redirect("/");
 });
 
 
