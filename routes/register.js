@@ -47,6 +47,7 @@ router.post("/", (req, res) => {
     // req.session.user_email = email;
     // res.redirect("/");
   })
+
   .catch((error) => {
     addNewUser([email, password]);
     req.session.user_email = email;
