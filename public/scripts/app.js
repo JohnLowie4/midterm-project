@@ -1,7 +1,7 @@
 //function creates element for every individual todo item
 const todoElement = function (todo) {
   newElement = `<label
-><input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}</label
+><input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}<button class="deleteButton" id="${todo.id}"> DeleteME </button></label
 >
 <article class="todoElement">
 <div>category: <span contenteditable="true"> ${todo.category} </span></div>
@@ -32,10 +32,10 @@ const addElement = function (todo) {
 
 $(document).ready(function () {
   //hide items on load
-  $(`.watch.todos`).hide()
-  $(`.read.todos`).hide()
-  $(`.buy.todos`).hide()
-  $(`.eat.todos`).hide()
+  $(`.watch.todos`).hide();
+  $(`.read.todos`).hide();
+  $(`.buy.todos`).hide();
+  $(`.eat.todos`).hide();
 
   //get existing todo items on page load / reload
   const loadToDos = function () {
@@ -73,6 +73,26 @@ $(document).ready(function () {
         loadToDos();
       }
     );
+  });
+
+  //Delete Button
+  $(".todo.container").on("click", ".deleteButton", function (e) {
+    e.preventDefault();
+    //Would be getting the ID from the current button
+    let id = $(this).attr("id");
+
+    //alert("We are  good to go");
+    $.ajax({
+      method: "POST",
+      url: `/todo/delete/${id}`,
+      success: function (result) {
+        alert(`Everything looked good. The todo is deleted ID = ${id}`);
+        alert(result.result);
+      },
+      error: function (error) {
+        console.log("there was an error doing this operation", error);
+      },
+    });
   });
 
   // toggle buttons for each category
