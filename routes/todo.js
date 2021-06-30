@@ -48,9 +48,13 @@ module.exports = (database) => {
       });
   });
 
-  //3. Route for the Deletion purpose
+
+    //3. Route for the Deletion purpose
   // /todo/delete/:todoid - POST - To delete a particular Route.
-  router.post("/delete/:todoid",(req,res)=>{
+   router.post("/delete/:todoid",(req,res)=>{
+    console.log("I am in the delete todo route");
+    console.log("The todo id is",req.params.todoid);
+    res.json({result: "Record Deleted"});
 
   });
 
@@ -59,5 +63,6 @@ module.exports = (database) => {
   router.post("/edit/:todoid",(req,res)=>{
 
   });
+
   return router;
 };
