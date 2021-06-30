@@ -5,6 +5,5 @@ CREATE TABLE todo_lists (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   category VARCHAR(255) DEFAULT NULL,
-  description TEXT DEFAULT NULL,
   status BOOLEAN DEFAULT TRUE
 );
