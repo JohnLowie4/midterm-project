@@ -16,7 +16,6 @@ const {
   getAllItemCategory,
   getActiveCategory,
   getArchivedCategory,
-  addNewUser,
   addToDoList,
   updateToDoList,
   deleteToDoList
@@ -70,13 +69,12 @@ app.use("/login", loginRoutes);
 app.use("/logout", logoutRoutes);
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
-const todoRoutes = require("./routes/todo");
-
+const todoRoutes = require("./routes/todo")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/widgets", widgetsRoutes(db))
 app.use("/todo", todoRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
@@ -86,7 +84,11 @@ app.use("/todo", todoRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   const templateVars = {user_email: req.session.user_email};
-  res.render("index", templateVars);
+  if(!req.session.user_email){
+    res.redirect('login');
+  }else {
+    res.render("index", templateVars);
+  }
 
 
 });
@@ -106,7 +108,12 @@ app.get("/", (req, res) => {
 //   res.render("register");
 // });
 
-
+//new to-do
+app.post("/todo", (req, res) => {
+  const {classifyText} = require("./public/scripts/determine_category_api");
+  classifyText(req.body.newTodo);
+  res.redirect("/");
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
