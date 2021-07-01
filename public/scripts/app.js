@@ -6,7 +6,7 @@ const todoElement = function (todo) {
     <div class="single-todo" id="${todo.id}">
       <span><i class="fas fa-check-square"></i>${todo.title} </i><i class="far fa-edit"></i></span>
       <div class="update">
-        <label>Change Category</label> <br>
+        <label>Change Category</label>
         <select name="category" class="categoryDropDown">
           <option value="" selected></option>
           <option value="toBuy">toBuy</option>
@@ -121,7 +121,7 @@ $(document).ready(function () {
         loadToDos();
       },
       error: function (error) {
-        console.log("there was an error doing this operation", error);
+        alert("Please choose a category!!");
       },
     });
   });
