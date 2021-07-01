@@ -44,7 +44,6 @@ router.post("/", (req, res) => {
     console.log("testing", req.session.user_email);
     const templateVars = {user_id: req.session.user_email};
     res.redirect("/");
-
   });
 
 });
