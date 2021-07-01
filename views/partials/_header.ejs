@@ -6,22 +6,22 @@
         <a class="nav-bar-link" href="/login">
 
     </div>
-    <div>
+    <div class= "userStatus">
       <% if(user_email){ %>
         <a class="navbar-brand"> Logged in as: <%=user_email%></a>
         <br/>
         <form class="form-inline" method="POST" action="/logout">
-          <button type="submit" class="btn btn-outline-dark"> Logout </button>
+          <button type="submit" class="logout-button"> Logout </button>
         </form>
 
     <% } else{ %>
       <a href="/register">Create Account</a>
-        <a href="/login">Login</a>
-        <form action="/logout" method="POST">
+      <a href="/login">Login</a>
+        <!-- <form action="/logout" method="POST">
           <button class="logout-button" type="Logout">
             Logout
           </button>
-        </form>
+        </form> -->
 
 
    <% } %>
