@@ -8,7 +8,7 @@
     </div>
     <div class= "userStatus">
       <% if(user_email){ %>
-        <a class="navbar-brand"> Logged in as: <%=user_email%></a>
+        <a class="navbar-brand"> <%=user_email%></a>
         <br/>
         <form class="form-inline" method="POST" action="/logout">
           <button type="submit" class="logout-button"> Logout </button>
