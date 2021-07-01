@@ -18,8 +18,8 @@ body h1 {
   justify-content: center;
   align-self: center;
   margin: auto;
-  width:40%;
-  height: 80%
+  width: 40%;
+  height: 80%;
 }
 
 .new.todo {
@@ -27,7 +27,7 @@ body h1 {
   justify-content: center;
 }
 
-.new.todo input{
+.new.todo input {
   outline: solid;
 }
 
@@ -35,7 +35,6 @@ body h1 {
   display: flex;
   justify-content: center;
   align-content: space-between;
-
 }
 
 .todos {
@@ -47,30 +46,66 @@ body h1 {
   /* border: black solid; */
 }
 
-.todos article{
-  border:black  solid;
-  margin: .5rem
+.single-todo {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-size: 20px;
 }
 
-.todos h6 {
-  height: min-content;
+.single-todo span {
+  display: flex;
+  justify-content: left;
+  height: 50px;
+  border: black solid;
+  border-style: dotted;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.far.fa-edit {
+  margin-left: auto;
+}
+
+.far.fa-edit:hover {
+  color: rgba(23, 73, 182, 0.705);
+}
+
+.fas.fa-check-square {
+  margin: 0.25em;
+}
+
+.fas.fa-check-square:hover {
+  color: rgba(23, 182, 126, 0.705);
+}
+
+.update {
+  display: none;
   margin: 0;
+  text-align: center;
+  height: 2.5em;
+}
+
+.updateButton {
+  display: none;
+  margin: 0.5em;
+
 }
 
 .collapsible {
   background-color: grey;
-  color:black;
+  color: black;
   cursor: pointer;
   padding: 18px;
   width: 100%;
-  border: black,solid;
+  border: black, solid;
   text-align: center;
   outline: none;
   font-size: 30px;
   font-weight: bold;
 }
 
-.active, .collapsible:hover {
+.active,
+.collapsible:hover {
   background-color: #ccc;
 }
-
