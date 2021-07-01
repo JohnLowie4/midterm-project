@@ -17,7 +17,7 @@ const todoElement = function (todo) {
         <br><br>
 
       </div>
-      <button class="updateButton">Update</button>
+      <button class="updateButton"><i class="far fa-save"></i> Save</button>
     </div>`;
 
   return newElement;
