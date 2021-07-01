@@ -6,14 +6,12 @@ const {
   getUserByEmail,
   deleteToDoList,
   getIdByEmail,
-  updateToDoList
+  updateToDoList,
 } = require("../database/database");
 
 module.exports = (database) => {
-  //1. load existing todo items inthe database
-  // /todo - GET to get all the Todos
+  //Get Todos
   router.get("/", (req, res) => {
-    //if logged in
     if (req.session.user_email) {
       database
         .query(`SELECT id FROM users WHERE email=$1`, [req.session.user_email])
@@ -27,10 +25,9 @@ module.exports = (database) => {
             });
         });
     }
-    //if not logged in?
   });
 
-  //new to-do
+  //2 New Todo
   router.post("/", async function (req, res) {
     if (!req.session.user_email) {
       return res
@@ -53,7 +50,7 @@ module.exports = (database) => {
       });
   });
 
-  // /todo/delete/:todoid - POST - To delete a particular Route.
+  //3 Delete Todo
   router.post("/delete/:todoid", (req, res) => {
     getIdByEmail(req.session.user_email).then((result) => {
       console.log("ID" + result);
@@ -62,16 +59,12 @@ module.exports = (database) => {
     });
   });
 
-  //4 Route for the Edit Todo
-  // /todo/edit/:todoid - POST - But for the Editing purpose
+  //4 Edit Todo
   router.post("/edit/:todoid/:catid", (req, res) => {
-    // let attribute = element.getAttribute(value);
-    // var e = document.getElementById("category");
-    // var newCategory = e.options[e.selectedIndex].value;
     getIdByEmail(req.session.user_email).then((result) => {
       console.log("ID" + result);
       console.log(req.params.catid);
-      updateToDoList(result, req.params.todoid,req.params.catid );
+      updateToDoList(result, req.params.todoid, req.params.catid);
       res.json({ result: "Record Edited" });
     });
   });
