@@ -3,10 +3,10 @@
 //function creates element for every individual todo item
 const todoElement = function (todo) {
   newElement = `
-    <div id="${todo.id}">
-      <input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}<button class="deleteButton"> DeleteME </button>
-      <div>
-        <label>Change category</label>
+    <div class="single-todo" id="${todo.id}">
+      <span><i class="fas fa-check-square"></i>${todo.title} </i><i class="far fa-edit"></i></span>
+      <div class="update">
+        <label>Change Category</label> <br>
         <select name="category" class="categoryDropDown">
           <option value="" selected></option>
           <option value="toBuy">toBuy</option>
@@ -49,6 +49,8 @@ $(document).ready(function () {
   $(`.buy.todos`).hide();
   $(`.eat.todos`).hide();
 
+
+
   //get existing todo items on page load / reload
   const loadToDos = function () {
     $.ajax({
@@ -88,7 +90,7 @@ $(document).ready(function () {
   });
 
   //Delete Button
-  $(".todo.container").on("click", ".deleteButton", function (e) {
+  $(".todo.container").on("click", ".fas.fa-check-square", function (e) {
     e.preventDefault();
     //Would be getting the ID from the current button
     let id = $(this).closest("div").prop("id");
@@ -135,4 +137,16 @@ $(document).ready(function () {
   toggleToDoList("read");
   toggleToDoList("buy");
   toggleToDoList("eat");
+
+//toggle edit drop down
+function toggleEditOption() {
+  $(".todo.container").on("click", ".far.fa-edit", function(e) {
+    let id = $(this).closest("div").prop("id");
+    $(`#${id} .update`).slideToggle();
+    $(`#${id} .updateButton`).slideToggle();
+  });
+}
+
+toggleEditOption()
+
 });
