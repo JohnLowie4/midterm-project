@@ -5,6 +5,9 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
 
 body h1 {
   display: flex;
