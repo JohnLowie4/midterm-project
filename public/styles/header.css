@@ -13,10 +13,10 @@ nav a {
   text-decoration: none;
   font-size: large;
 }
-
+/*
 nav a:hover{
   color: white;
-}
+} */
 
 .logout-button {
   margin: 0.5em;
