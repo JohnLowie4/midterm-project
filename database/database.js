@@ -222,25 +222,20 @@ const addToDoList = (userID, arrOfArgs) => {
  * Use this to archive an item of a user
  * @param {Integer} userID
  * @param {Integer} todoID Integer ID of a specified to do item
- * @param {Array} arrOfArgs An array of arguments to be updated
+ * @param {String} category An array of arguments to be updated
  * @returns {Promise<{}>} an object of the updated item in todo_lists
  */
-const updateToDoList = (userID, todoID, arrOfArgs) => {
+const updateToDoList = (userID, todoID, category) => {
 
   const queryString = `
     UPDATE todo_lists
-    SET title = $3,
-        category = $4,
-        status = $5
+    SET category = $3
     WHERE user_id = $1 AND id = $2
     RETURNING *
   `;
 
-  arrOfArgs.forEach(element => `%${element}%`); // Changes arguments to prevent sql injection
-  arrOfArgs.unshift(userID, todoID);  // Appends the userID as first element in arrOfArgs
-
   return pool
-    .query(queryString, arrOfArgs)
+    .query(queryString, [userID, todoID, category])
     .then((result) => {
       return result.rows[0];
     })

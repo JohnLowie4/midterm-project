@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { classifyText } = require("./determine_category_api");
-const { pool, getUserByEmail } = require("../database/database");
+const {
+  pool,
+  getUserByEmail,
+  deleteToDoList,
+  getIdByEmail,
+  updateToDoList
+} = require("../database/database");
 
 module.exports = (database) => {
   //1. load existing todo items inthe database
@@ -24,13 +30,12 @@ module.exports = (database) => {
     //if not logged in?
   });
 
-  //2. /todo - POST to create a new TODO
   //new to-do
   router.post("/", async function (req, res) {
-    if (!req.session.user_email){
+    if (!req.session.user_email) {
       return res
-      .status(403)
-      .send("Must be logged in to create to-do list items!")
+        .status(403)
+        .send("Must be logged in to create to-do list items!");
     }
     let newToDoCategory = await classifyText(req.body.task);
     res.send(newToDoCategory);
@@ -48,20 +53,27 @@ module.exports = (database) => {
       });
   });
 
-
-  //3. Route for the Deletion purpose
   // /todo/delete/:todoid - POST - To delete a particular Route.
-   router.post("/delete/:todoid",(req,res)=>{
-    console.log("I am in the delete todo route");
-    console.log("The todo id is",req.params.todoid);
-    res.json({result: "Record Deleted"});
-
+  router.post("/delete/:todoid", (req, res) => {
+    getIdByEmail(req.session.user_email).then((result) => {
+      console.log("ID" + result);
+      deleteToDoList(result, req.params.todoid);
+      res.json({ result: "Record Deleted" });
+    });
   });
 
   //4 Route for the Edit Todo
   // /todo/edit/:todoid - POST - But for the Editing purpose
-  router.post("/edit/:todoid",(req,res)=>{
-
+  router.post("/edit/:todoid/:catid", (req, res) => {
+    // let attribute = element.getAttribute(value);
+    // var e = document.getElementById("category");
+    // var newCategory = e.options[e.selectedIndex].value;
+    getIdByEmail(req.session.user_email).then((result) => {
+      console.log("ID" + result);
+      console.log(req.params.catid);
+      updateToDoList(result, req.params.todoid,req.params.catid );
+      res.json({ result: "Record Edited" });
+    });
   });
 
   return router;

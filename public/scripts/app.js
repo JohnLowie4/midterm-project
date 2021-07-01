@@ -1,12 +1,24 @@
+// const {pool, updateToDoList } = require('../databse/database');
+
 //function creates element for every individual todo item
 const todoElement = function (todo) {
-  newElement = `<label
-><input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}<button class="deleteButton" id="${todo.id}"> DeleteME </button></label
->
-<article class="todoElement">
-<div>category: <span contenteditable="true"> ${todo.category} </span></div>
-<div>title:<span contenteditable="true">${todo.title}</span></div>
-</article>`;
+  newElement = `
+    <div id="${todo.id}">
+      <input type="checkbox" name="todo-element" id="${todo.id}" />${todo.title}<button class="deleteButton"> DeleteME </button>
+      <div>
+        <label>Change category</label>
+        <select name="category" class="categoryDropDown">
+          <option value="" selected></option>
+          <option value="toBuy">toBuy</option>
+          <option value="toEat">toEat</option>
+          <option value="toWatch">toWatch</option>
+          <option value="toRead">toRead</option>
+        </select>
+        <br><br>
+
+      </div>
+      <button class="updateButton">Update</button>
+    </div>`;
 
   return newElement;
 };
@@ -79,13 +91,32 @@ $(document).ready(function () {
   $(".todo.container").on("click", ".deleteButton", function (e) {
     e.preventDefault();
     //Would be getting the ID from the current button
-    let id = $(this).attr("id");
+    let id = $(this).closest("div").prop("id");
     $.ajax({
       method: "POST",
       url: `/todo/delete/${id}`,
       success: function (result) {
-        alert(`Everything looked good. The todo is deleted ID = ${id}`);
-        alert(result.result);
+        loadToDos();
+      },
+      error: function (error) {
+        console.log("there was an error doing this operation", error);
+      },
+    });
+  });
+
+   //Edit ToDo
+   $(".todo.container").on("click", ".updateButton", function (e) {
+    e.preventDefault();
+    console.log("here");
+    //Would be getting the ID from the current button
+    let id = $(this).closest("div").prop("id");
+    let newCategory = $(".categoryDropDown").find(":selected").text();
+    console.log("category", newCategory);
+    $.ajax({
+      method: "POST",
+      url: `/todo/edit/${id}/${newCategory}`,
+      success: function (result) {
+        loadToDos();
       },
       error: function (error) {
         console.log("there was an error doing this operation", error);
