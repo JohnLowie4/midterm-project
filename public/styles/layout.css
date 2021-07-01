@@ -89,13 +89,13 @@ body h1 {
   display: none;
   margin: 0;
   text-align: center;
-  height: 2.5em;
-  font-size: medium;
+  height: 1.5em;
+  font-size: small;
 }
 
 .updateButton {
   display: none;
-  margin: 0.5em;
+  margin: 0;
   border: none;
   background-color: white;
   font-size: small;
