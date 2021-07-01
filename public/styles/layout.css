@@ -1,8 +1,9 @@
-body {
-  background-color: #eee;
-  background-image: url(images/minimalist-background-uhd-8k-wallpaper.png);
+html {
+  background: url(images/minimalist-background-uhd-8k-wallpaper.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 body h1 {
@@ -28,7 +29,12 @@ body h1 {
 }
 
 .new.todo input {
-  outline: solid;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 .todo.list {
@@ -50,13 +56,13 @@ body h1 {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  font-size: 20px;
+  font-size: large;
 }
 
 .single-todo span {
   display: flex;
   justify-content: left;
-  height: 50px;
+  height: max-content;
   border: black solid;
   border-style: dotted;
   margin: 0.5em;
@@ -84,28 +90,32 @@ body h1 {
   margin: 0;
   text-align: center;
   height: 2.5em;
+  font-size: medium;
 }
 
 .updateButton {
   display: none;
   margin: 0.5em;
+  border: none;
+  background-color: white;
+  font-size: small;
+}
 
+.updateButton:hover {
+  color:rgba(23, 73, 182, 0.705);
 }
 
 .collapsible {
-  background-color: grey;
-  color: black;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  /* margin: 8px 0; */
+  border: none;
   cursor: pointer;
-  padding: 18px;
   width: 100%;
-  border: black, solid;
-  text-align: center;
-  outline: none;
-  font-size: 30px;
-  font-weight: bold;
 }
 
 .active,
 .collapsible:hover {
-  background-color: #ccc;
+  background-color: lightgreen;
 }
